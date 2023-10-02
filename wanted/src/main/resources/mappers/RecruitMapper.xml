@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.wanted.mapper.RecruitMapper">
+	<insert id="insertRecruit">
+		insert into recruit (company_id, title, content, reward, skill)
+		values (#{company_id}, #{title}, #{content}, #{reward}, #{skill})
+	</insert>
+	
+	<update id="updateRecruit">
+		update recruit
+		set company_id = #{company_id}, 
+		title =#{title},
+		content = #{content}, 
+		reward = #{reward}, 
+		skill = #{skill}
+		where recruit_id = #{recruit_id}
+	</update>
+	
+	<delete id="deleteRecruit">
+		delete 
+		from recruit
+		where recruit_id=#{recruit_id}
+	</delete>
+	
+	<select id="selectRecruit"
+		resultType="com.wanted.domain.RecruitDTO">
+		select *
+		from recruit
+		where recruit_id=#{recruit_id}
+	</select>
+
+	<select id="selectRecruit_idList" resultType="String">
+		select recruit_id
+		from recruit
+		where company_id=#{company_id}
+	</select>
+
+	<select id="selectRecruitList" parameterType="String" 
+	resultType="com.wanted.domain.RecruitDTO" >
+		select *
+		from recruit
+		where recruit_id LIKE CONCAT('%', #{syntax}, '%')
+    	or title LIKE CONCAT('%', #{syntax}, '%')
+    	or content LIKE CONCAT('%', #{syntax}, '%')
+    	or reward LIKE CONCAT('%', #{syntax}, '%')
+    	or skill LIKE CONCAT('%', #{syntax}, '%')
+    	or company_id LIKE CONCAT('%', #{syntax}, '%')
+	</select>
+</mapper>
