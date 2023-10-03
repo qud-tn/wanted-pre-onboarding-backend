@@ -1,10 +1,9 @@
 package com.wanted.domain;
 
 import java.util.HashMap;
-import java.util.List;
 
-public class RecruitDTO {
-	private int recruit_id;
+public class HiringDTO {
+	private Integer hiring_id;
 	private String company_id;
 	private String title;
 	private String content;
@@ -17,11 +16,11 @@ public class RecruitDTO {
 	public void setSkill(String skill) {
 		this.skill = skill;
 	}
-	public int getRecruit_id() {
-		return recruit_id;
+	public Integer getHiring_id() {
+		return hiring_id;
 	}
-	public void setRecruit_id(int recruit_id) {
-		this.recruit_id = recruit_id;
+	public void setHiring_id(Integer hiring_id) {
+		this.hiring_id = hiring_id;
 	}
 	public String getCompany_id() {
 		return company_id;
@@ -49,20 +48,20 @@ public class RecruitDTO {
 	}
 	
 	public HashMap<String, Object> toHashMap() {
-		HashMap<String, Object> recruitMap = new HashMap<String, Object>();
+		HashMap<String, Object> hiringMap = new HashMap<String, Object>();
 		
-		recruitMap.put("company_id", this.getCompany_id());
-		recruitMap.put("content", this.getContent());
-		recruitMap.put("reward", this.getReward());
-		recruitMap.put("skill", this.getSkill());
-		recruitMap.put("title", this.getTitle());
+		hiringMap.put("company_id", this.getCompany_id());
+		hiringMap.put("content", this.getContent());
+		hiringMap.put("reward", this.getReward());
+		hiringMap.put("skill", this.getSkill());
+		hiringMap.put("title", this.getTitle());
 		
-		return recruitMap;
+		return hiringMap;
 	}
 	
 	@Override
 	public String toString() {
-		return "RecruitDTO [recruit_id=" + recruit_id + ", company_id=" + company_id + ", title=" + title + ", content="
+		return "hiringDTO [hiring_id=" + hiring_id + ", company_id=" + company_id + ", title=" + title + ", content="
 				+ content + ", reward=" + reward + ", skill=" + skill + "]";
 	}
 	

@@ -4,7 +4,6 @@ package com.wanted.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +17,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wanted.domain.RecruitDTO;
-import com.wanted.service.RecruitService;
+import com.wanted.domain.HiringDTO;
+import com.wanted.service.HiringService;
 
 @RestController
 @RequestMapping(value="/*")
-public class RecruitRestController {
+public class HiringRestController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(RecruitRestController.class);
+	private static final Logger logger = LoggerFactory.getLogger(HiringRestController.class);
 	
 	@Autowired
-	private RecruitService rService;
+	private HiringService hService;
 	
-	@PostMapping(value="/recruits")
-	public ResponseEntity<String> postRecruit(@RequestBody RecruitDTO rdto) throws Exception {
-		Integer result= rService.saveRecruit(rdto);
+	@PostMapping(value="/hirings")
+	public ResponseEntity<String> postHiring(@RequestBody HiringDTO rdto) throws Exception {
+		Integer result= hService.saveHiring(rdto);
 		
 		logger.debug("DTO :"+result);
 		
@@ -47,13 +45,13 @@ public class RecruitRestController {
 		}
 	}
 
-	@PutMapping(value="/recruits/{recruit_id}")
-	public ResponseEntity<String> putRecruit(@PathVariable("recruit_id") Integer recruit_id
-			, @RequestBody RecruitDTO rdto) throws Exception {
+	@PutMapping(value="/hiring/{hiring_id}")
+	public ResponseEntity<String> putHiring(@PathVariable("hiring_id") Integer hiring_id
+			, @RequestBody HiringDTO rdto) throws Exception {
 		
-		rdto.setRecruit_id(recruit_id);
+		rdto.setHiring_id(hiring_id);
 		
-		Integer result = rService.editRecruit(rdto);
+		Integer result = hService.editHiring(rdto);
 		
 		logger.debug("DTO :"+result);
 		
@@ -64,9 +62,9 @@ public class RecruitRestController {
 		}
 	}
 
-	@DeleteMapping(value="/recruits/{recruit_id}")
-	public ResponseEntity<String> deleteRecruit(@PathVariable("recruit_id") Integer recruit_id) throws Exception {
-		Integer result = rService.removeRecruit(recruit_id);
+	@DeleteMapping(value="/hiring/{hiring_id}")
+	public ResponseEntity<String> deleteHiring(@PathVariable("hiring_id") Integer hiring_id) throws Exception {
+		Integer result = hService.removeHiring(hiring_id);
 		
 		logger.debug("DTO :"+result);
 		
@@ -77,9 +75,9 @@ public class RecruitRestController {
 		}
 	}
 
-	@GetMapping(value="/recruits/{recruit_id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<String> getRecruit(@PathVariable("recruit_id") Integer recruit_id) throws Exception {
-		HashMap<String, Object> result = rService.findRecruit(recruit_id);
+	@GetMapping(value="/hiring/{hiring_id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<String> getHiring(@PathVariable("hiring_id") Integer hiring_id) throws Exception {
+		HashMap<String, Object> result = hService.findHiring(hiring_id);
 		
 		logger.debug("HashMap :"+result);
 		
@@ -93,9 +91,9 @@ public class RecruitRestController {
 		}
 	}
 
-	@GetMapping(value="/recruits")
-	public ResponseEntity<String> searchRecruits(String syntax) throws Exception {
-		List<RecruitDTO> result = rService.searchRecruits(syntax);
+	@GetMapping(value="/hirings", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<String> searchHirings(String syntax) throws Exception {
+		List<HiringDTO> result = hService.searchHirings(syntax);
 		
 		logger.debug("List.size() :"+result.size());
 		
@@ -105,7 +103,7 @@ public class RecruitRestController {
 		if(!result.isEmpty()) {
 			return ResponseEntity.ok(resultJSON);
 		}else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("검색 결과가 없습니다");
+			return ResponseEntity.ok("검색 결과가 없습니다");
 		}
 	}
 	

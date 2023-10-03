@@ -4,46 +4,46 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.wanted.mapper.RecruitMapper">
-	<insert id="insertRecruit">
-		insert into recruit (company_id, title, content, reward, skill)
+<mapper namespace="com.wanted.mapper.HiringMapper">
+	<insert id="insertHiring">
+		insert into hiring (company_id, title, content, reward, skill)
 		values (#{company_id}, #{title}, #{content}, #{reward}, #{skill})
 	</insert>
 	
-	<update id="updateRecruit">
-		update recruit
+	<update id="updateHiring">
+		update hiring
 		set company_id = #{company_id}, 
 		title =#{title},
 		content = #{content}, 
 		reward = #{reward}, 
 		skill = #{skill}
-		where recruit_id = #{recruit_id}
+		where hiring_id = #{hiring_id}
 	</update>
 	
-	<delete id="deleteRecruit">
+	<delete id="deleteHiring">
 		delete 
-		from recruit
-		where recruit_id=#{recruit_id}
+		from hiring
+		where hiring_id=#{hiring_id}
 	</delete>
 	
-	<select id="selectRecruit"
-		resultType="com.wanted.domain.RecruitDTO">
+	<select id="selectHiring"
+		resultType="com.wanted.domain.HiringDTO">
 		select *
-		from recruit
-		where recruit_id=#{recruit_id}
+		from hiring
+		where hiring_id=#{hiring_id}
 	</select>
 
-	<select id="selectRecruit_idList" resultType="String">
-		select recruit_id
-		from recruit
+	<select id="selectHiring_idList" resultType="String">
+		select hiring_id
+		from hiring
 		where company_id=#{company_id}
 	</select>
 
-	<select id="selectRecruitList" parameterType="String" 
-	resultType="com.wanted.domain.RecruitDTO" >
+	<select id="selectHiringList" parameterType="String" 
+	resultType="com.wanted.domain.HiringDTO" >
 		select *
-		from recruit
-		where recruit_id LIKE CONCAT('%', #{syntax}, '%')
+		from hiring
+		where hiring_id LIKE CONCAT('%', #{syntax}, '%')
     	or title LIKE CONCAT('%', #{syntax}, '%')
     	or content LIKE CONCAT('%', #{syntax}, '%')
     	or reward LIKE CONCAT('%', #{syntax}, '%')
