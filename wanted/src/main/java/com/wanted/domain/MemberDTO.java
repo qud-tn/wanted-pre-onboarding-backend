@@ -20,6 +20,6 @@ public class MemberDTO {
 	@Override
 	public String toString() {
 		return "MemberDTO [Member_id=" + Member_id + ", password=" + password + "]";
-	}
+	} 
 	
 }

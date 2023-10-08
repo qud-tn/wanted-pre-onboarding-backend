@@ -20,5 +20,5 @@ public class CompanyDTO {
 	public String toString() {
 		return "CompanyDTO [Company_id=" + Company_id + ", location=" + location + "]";
 	}
-	
+	 
 }
